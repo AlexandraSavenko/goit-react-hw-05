@@ -3,6 +3,7 @@ import "./App.css";
 import Navigation from "./components/Navigation/Navigation";
 import HomePage from "./pages/HomePage";
 import MoviesPage from "./pages/MoviesPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/movies" element={<MoviesPage />} />
-        <Route path="*" element={<p>Page not found</p>} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );
