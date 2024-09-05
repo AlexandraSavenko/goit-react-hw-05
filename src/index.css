@@ -29,6 +29,10 @@ li {
 }
 a {
   text-decoration: none;
+  color: rgb(114, 56, 15);
+}
+a:hover {
+  font-weight: 500;
 }
 body {
   margin: 0;
