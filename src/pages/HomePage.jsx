@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import fetchdata from "../fetchdata";
+import { fetchdata } from "../fetchdata";
 import MovieList from "../components/MovieList/MovieList";
 export default function HomePage() {
   const [trendingMovies, setTrendingMovies] = useState([]);
