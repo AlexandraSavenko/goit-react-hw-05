@@ -7,6 +7,7 @@ export default function MovieDetailsPage() {
   const [movieData, setMovieData] = useState(null);
   const [genres, setGenres] = useState([]);
   const [score, setScore] = useState(0);
+  const [posterPath, setPosterPath] = useState("");
 
   useEffect(() => {
     async function fetchMovieData() {
@@ -16,11 +17,10 @@ export default function MovieDetailsPage() {
       setGenres(movieGen);
       const userScore = Math.round(data.popularity);
       setScore(`User score: ${userScore}%`);
+      setPosterPath(data.poster_path);
     }
     fetchMovieData();
   }, [movieId]);
-  console.log(movieData);
-  console.log(score);
 
   return (
     movieData && (
@@ -28,7 +28,7 @@ export default function MovieDetailsPage() {
         <button>Go back</button>
         <div className={css.movieInfoWrap}>
           <img
-            src={`https://image.tmdb.org/t/p/w300/${movieData.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w300/${posterPath}`}
             alt="movie_poster"
           />
           <ul>
