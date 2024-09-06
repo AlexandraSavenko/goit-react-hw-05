@@ -7,6 +7,7 @@ export default function MoviesPage() {
   const [errorQuery, setErrorQuery] = useState(false);
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [params, setParams] = useSearchParams();
 
   const handleSubmit = (e) => {
@@ -31,8 +32,11 @@ export default function MoviesPage() {
         setLoading(true);
         const data = await fetchdata(1, movieName, "search/movie");
         setMovies(data.results);
+      } catch (error) {
+        setError(true);
+      } finally {
         setLoading(false);
-      } catch (error) {}
+      }
     }
     fetchedData();
   }, [movieName]);
@@ -45,6 +49,8 @@ export default function MoviesPage() {
         <button type="submit">Search</button>
       </form>
       {errorQuery && <p>You need to fill in your query!</p>}
+      {error && <b>Error!!!</b>}
+      {loading && <b>LOADING...</b>}
       {movies.length > 0 && <MovieList allMovies={movies} />}
     </div>
   );
