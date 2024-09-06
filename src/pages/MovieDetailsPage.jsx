@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Link,
   NavLink,
@@ -12,7 +12,7 @@ import NotFoundPage from "./NotFoundPage";
 import clsx from "clsx";
 export default function MovieDetailsPage() {
   const location = useLocation();
-  console.log(location);
+  const backLinkRef = useRef(location.state);
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState(null);
   const [genres, setGenres] = useState([]);
@@ -53,7 +53,7 @@ export default function MovieDetailsPage() {
   return (
     movieData && (
       <div className={css.wrap}>
-        <Link to={location.state}>Go back</Link>
+        <Link to={backLinkRef.current ?? "/"}>Go back</Link>
         <div className={css.movieInfoWrap}>
           <img
             src={`https://image.tmdb.org/t/p/w300/${posterPath}`}
@@ -90,7 +90,7 @@ export default function MovieDetailsPage() {
               Reviews
             </NavLink>
           </ul>
-          <Outlet />
+          <Outlet context={{ movieId }} />
         </div>
       </div>
     )
