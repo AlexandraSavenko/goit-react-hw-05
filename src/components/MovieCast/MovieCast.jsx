@@ -2,14 +2,18 @@ import { useEffect, useState } from "react";
 import { getCast } from "../../fetchdata";
 export default function MovieCast() {
   const [movieCast, setMovieCast] = useState(null);
+
   useEffect(() => {
     async function fetchMovieCast() {
       try {
         const data = await getCast();
+        setMovieCast(data.results);
+        console.log(movieCast);
       } catch (error) {}
     }
+    fetchMovieCast();
   }, []);
-  function getMovieCast() {}
+
   return (
     <div>
       <img src="" alt="" />

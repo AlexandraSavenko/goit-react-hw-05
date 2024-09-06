@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { fetchdata } from "../fetchdata";
 import MovieList from "../components/MovieList/MovieList";
 
 export default function MoviesPage() {
+  // const location = useLocation();
+
   const [errorQuery, setErrorQuery] = useState(false);
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);

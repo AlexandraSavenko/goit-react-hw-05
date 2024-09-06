@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react";
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import { getMovie } from "../fetchdata";
 import css from "../css/MovieDetailsPage.module.css";
 import NotFoundPage from "./NotFoundPage";
 import clsx from "clsx";
 export default function MovieDetailsPage() {
+  const location = useLocation();
+  console.log(location);
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState(null);
   const [genres, setGenres] = useState([]);
@@ -45,7 +53,7 @@ export default function MovieDetailsPage() {
   return (
     movieData && (
       <div className={css.wrap}>
-        <button>Go back</button>
+        <Link to={location.state}>Go back</Link>
         <div className={css.movieInfoWrap}>
           <img
             src={`https://image.tmdb.org/t/p/w300/${posterPath}`}
