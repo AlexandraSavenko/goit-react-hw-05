@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { getMovie } from "../fetchdata";
 import css from "../css/MovieDetailsPage.module.css";
 import NotFoundPage from "./NotFoundPage";
@@ -71,6 +71,10 @@ export default function MovieDetailsPage() {
         </div>
         <div>
           <p>Additional information:</p>
+          <ul className={css.addList}>
+            <NavLink to="MovieCast">Cast</NavLink>
+            <NavLink to="MovieReviews">Reviews</NavLink>
+          </ul>
         </div>
       </div>
     )
