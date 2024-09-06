@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMovie } from "../fetchdata";
+import css from "../css/MovieDetailsPage.module.css";
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState(null);
@@ -23,10 +24,13 @@ export default function MovieDetailsPage() {
 
   return (
     movieData && (
-      <div>
+      <div className={css.wrap}>
         <button>Go back</button>
-        <div>
-          <img src="" alt="" />
+        <div className={css.movieInfoWrap}>
+          <img
+            src={`https://image.tmdb.org/t/p/w300/${movieData.poster_path}`}
+            alt="movie_poster"
+          />
           <ul>
             <li>
               <h2>{movieData.original_title}</h2>

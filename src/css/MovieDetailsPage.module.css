@@ -1,0 +1,8 @@
+.wrap {
+  padding: 10px;
+}
+.movieInfoWrap {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+}
