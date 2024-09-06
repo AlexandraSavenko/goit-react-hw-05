@@ -2,25 +2,42 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMovie } from "../fetchdata";
 import css from "../css/MovieDetailsPage.module.css";
+import NotFoundPage from "./NotFoundPage";
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState(null);
   const [genres, setGenres] = useState([]);
   const [score, setScore] = useState(0);
   const [posterPath, setPosterPath] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     async function fetchMovieData() {
-      const data = await getMovie(movieId);
-      setMovieData(data);
-      const movieGen = data.genres.map((genre) => genre.name).join(", ");
-      setGenres(movieGen);
-      const userScore = Math.round(data.popularity);
-      setScore(`User score: ${userScore}%`);
-      setPosterPath(data.poster_path);
+      try {
+        setLoading(true);
+        setError(false);
+        const data = await getMovie(movieId);
+        setMovieData(data);
+        const movieGen = data.genres.map((genre) => genre.name).join(", ");
+        setGenres(movieGen);
+        const userScore = Math.round(data.popularity);
+        setScore(`User score: ${userScore}%`);
+        setPosterPath(data.poster_path);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
     }
     fetchMovieData();
   }, [movieId]);
+  if (error) {
+    return <NotFoundPage />;
+  }
+  if (loading) {
+    return <b>Loading...</b>;
+  }
 
   return (
     movieData && (
@@ -51,6 +68,9 @@ export default function MovieDetailsPage() {
               <p>{genres}</p>
             </li>
           </ul>
+        </div>
+        <div>
+          <p>Additional information:</p>
         </div>
       </div>
     )
