@@ -8,7 +8,17 @@
   padding-bottom: 20px;
   border-bottom: 1px solid gray;
 }
+.addWrap {
+  padding: 8px;
+}
 .addList {
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid gray;
+}
+.link {
+  color: black;
+}
+.isActive {
+  color: brown;
 }

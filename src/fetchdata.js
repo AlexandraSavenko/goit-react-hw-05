@@ -17,3 +17,10 @@ export async function getMovie(movieId) {
   const response = await axios.get(`/movie/${movieId}`);
   return response.data;
 }
+export async function getCast(movieId) {
+  const response = await axios.get(
+    `/movie/${movieId}/creditscredits?language=en-US`
+  );
+
+  return response.data;
+}

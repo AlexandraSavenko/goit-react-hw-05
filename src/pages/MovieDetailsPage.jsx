@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import { getMovie } from "../fetchdata";
 import css from "../css/MovieDetailsPage.module.css";
 import NotFoundPage from "./NotFoundPage";
+import clsx from "clsx";
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState(null);
@@ -38,7 +39,9 @@ export default function MovieDetailsPage() {
   if (loading) {
     return <b>Loading...</b>;
   }
-
+  function linksActive(props) {
+    return clsx(css.link, props.isActive && css.isActive);
+  }
   return (
     movieData && (
       <div className={css.wrap}>
@@ -69,12 +72,17 @@ export default function MovieDetailsPage() {
             </li>
           </ul>
         </div>
-        <div>
+        <div className={css.addWrap}>
           <p>Additional information:</p>
           <ul className={css.addList}>
-            <NavLink to="MovieCast">Cast</NavLink>
-            <NavLink to="MovieReviews">Reviews</NavLink>
+            <NavLink className={linksActive} to="cast">
+              Cast
+            </NavLink>
+            <NavLink className={linksActive} to="reviews">
+              Reviews
+            </NavLink>
           </ul>
+          <Outlet />
         </div>
       </div>
     )
