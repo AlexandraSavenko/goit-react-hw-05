@@ -23,7 +23,7 @@ function App() {
   return (
     <div>
       <Navigation />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/movies" element={<MoviesPage />} />

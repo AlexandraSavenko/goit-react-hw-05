@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { getInfo } from "../../fetchdata";
-import { useOutletContext } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CastList from "../CastList/CastList";
 import css from "./MovieCast.module.css";
 export default function MovieCast() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [movieCast, setMovieCast] = useState([]);
-  const { movieId } = useOutletContext();
+  const { movieId } = useParams();
 
   useEffect(() => {
     async function fetchMovieCast() {
@@ -17,7 +17,7 @@ export default function MovieCast() {
         const data = await getInfo(movieId, "credits");
         setMovieCast(data.cast);
       } catch (error) {
-        setError(true);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
@@ -31,8 +31,8 @@ export default function MovieCast() {
 
       <ul className={css.list}>
         {movieCast.length > 0 ? (
-          movieCast.map((actor, index) => (
-            <li className={css.item} key={actor.id || index}>
+          movieCast.map((actor) => (
+            <li className={css.item} key={actor.id}>
               {<CastList info={actor} />}
             </li>
           ))

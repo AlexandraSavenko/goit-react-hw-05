@@ -17,7 +17,7 @@ export default function HomePage() {
         );
         setTrendingMovies(data.results);
       } catch (error) {
-        setError(true);
+        setError(error.message);
       } finally {
         setLoading(false);
       }

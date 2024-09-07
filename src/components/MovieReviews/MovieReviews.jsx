@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getInfo } from "../../fetchdata";
 import RevList from "../RevList/RevList";
 import css from "./MovieReviews.module.css";
-import { DiVim } from "react-icons/di";
 
 export default function MovieReviews() {
   const [movieReviews, setMovieReviews] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const { movieId } = useOutletContext();
+  const { movieId } = useParams();
 
   useEffect(() => {
     async function fetchMovieReviews() {
@@ -19,7 +18,7 @@ export default function MovieReviews() {
         const data = await getInfo(movieId, "reviews");
         setMovieReviews(data.results);
       } catch (error) {
-        setError(true);
+        setError(error.message);
       } finally {
         setLoading(false);
       }

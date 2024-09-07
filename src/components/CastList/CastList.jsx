@@ -2,9 +2,8 @@ import { BsFileEarmarkPerson } from "react-icons/bs";
 import css from "./CastList.module.css";
 export default function CastList({ info }) {
   const photoPath = info.profile_path
-    ? `https://image.tmdb.org/t/p/w100/${info.profile_path}`
+    ? `https://image.tmdb.org/t/p/w500/${info.profile_path}`
     : null;
-
   return (
     <div className={css.cardWrap}>
       {photoPath ? (

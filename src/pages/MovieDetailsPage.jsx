@@ -34,7 +34,7 @@ export default function MovieDetailsPage() {
         setScore(`User score: ${userScore}%`);
         setPosterPath(data.poster_path);
       } catch (error) {
-        setError(true);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
@@ -97,7 +97,7 @@ export default function MovieDetailsPage() {
               Reviews
             </NavLink>
           </ul>
-          <Outlet context={{ movieId }} />
+          <Outlet />
         </div>
       </div>
     )
