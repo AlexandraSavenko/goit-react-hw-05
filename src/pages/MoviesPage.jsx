@@ -2,31 +2,26 @@ import { useEffect, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { fetchdata } from "../fetchdata";
 import MovieList from "../components/MovieList/MovieList";
-import css from "../css/MoviePage.module.css";
+import SearchForm from "../components/SearchForm/SearchForm";
 
 export default function MoviesPage() {
   // const location = useLocation();
 
-  const [errorQuery, setErrorQuery] = useState(false);
+  const [errorQuery, setErrorQuery] = useState(null);
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [params, setParams] = useSearchParams();
+  const [params, setSearchParams] = useSearchParams();
+  const movieName = params.get("movieName");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const query = e.target.elements.movieName.value.trim();
-    if (!query) {
+  async function handleSubmit(value) {
+    if (!value.trim()) {
       setErrorQuery(true);
       return;
     }
-    params.set("movieName", query);
-    setParams(params);
-
-    e.target.reset();
-    setErrorQuery(false);
-  };
-  const movieName = params.get("movieName");
+    setErrorQuery(null);
+    setSearchParams({ movieName: value });
+  }
 
   useEffect(() => {
     if (!movieName) return;
@@ -36,21 +31,17 @@ export default function MoviesPage() {
         const data = await fetchdata(1, movieName, "search/movie");
         setMovies(data.results);
       } catch (error) {
-        setError(true);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
     }
     fetchedData();
   }, [movieName]);
-
+  // const movieName = params.get("movieName");
   return (
     <div>
-      <form className={css.form} onSubmit={handleSubmit}>
-        <input className={css.input} type="text" name="movieName" />
-
-        <button type="submit">Search</button>
-      </form>
+      <SearchForm onSubmit={handleSubmit} />
       {errorQuery && <p>You need to fill in your query!</p>}
       {error && <b>Error!!!</b>}
       {loading && <b>LOADING...</b>}

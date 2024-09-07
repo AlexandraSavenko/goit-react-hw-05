@@ -10,6 +10,7 @@ export default function MovieCast() {
   const { movieId } = useParams();
 
   useEffect(() => {
+    if (!movieId) return;
     async function fetchMovieCast() {
       try {
         setLoading(true);
