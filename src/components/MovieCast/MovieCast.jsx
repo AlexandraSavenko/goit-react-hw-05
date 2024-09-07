@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCast } from "../../fetchdata";
+import { getInfo } from "../../fetchdata";
 import { useOutletContext } from "react-router-dom";
 import CastList from "../CastList/CastList";
 import css from "./MovieCast.module.css";
@@ -10,7 +10,7 @@ export default function MovieCast() {
   useEffect(() => {
     async function fetchMovieCast() {
       try {
-        const data = await getCast(movieId);
+        const data = await getInfo(movieId, "credits");
         setMovieCast(data.cast);
       } catch (error) {}
     }

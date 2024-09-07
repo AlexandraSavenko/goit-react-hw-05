@@ -17,8 +17,8 @@ export async function getMovie(movieId) {
   const response = await axios.get(`/movie/${movieId}`);
   return response.data;
 }
-export async function getCast(movieId) {
-  const response = await axios.get(`/movie/${movieId}/credits`, {
+export async function getInfo(movieId, endpoint) {
+  const response = await axios.get(`/movie/${movieId}/${endpoint}`, {
     params: { language: "en-US" },
   });
 
