@@ -30,7 +30,7 @@ export default function MovieDetailsPage() {
         setMovieData(data);
         const movieGen = data.genres.map((genre) => genre.name).join(", ");
         setGenres(movieGen);
-        const userScore = Math.round(data.popularity);
+        const userScore = Math.floor(data.vote_average);
         setScore(`User score: ${userScore}%`);
         setPosterPath(data.poster_path);
       } catch (error) {
@@ -50,6 +50,7 @@ export default function MovieDetailsPage() {
   function linksActive(props) {
     return clsx(css.link, props.isActive && css.isActive);
   }
+
   return (
     movieData && (
       <div className={css.wrap}>
@@ -61,7 +62,10 @@ export default function MovieDetailsPage() {
           />
           <ul>
             <li>
-              <h2>{movieData.original_title}</h2>
+              <h2>
+                {movieData.original_title}{" "}
+                <span>{`(${Number.parseInt(movieData.release_date)})`}</span>
+              </h2>
             </li>
             <li>
               <p>{score}</p>
