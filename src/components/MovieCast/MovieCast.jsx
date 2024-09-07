@@ -24,20 +24,21 @@ export default function MovieCast() {
     }
     fetchMovieCast();
   }, [movieId]);
-
   return (
     <div>
       {error && <b>Error!!!</b>}
       {loading && <b>LOADING...</b>}
 
       <ul className={css.list}>
-        {movieCast &&
-          movieCast.length > 0 &&
+        {movieCast.length > 0 ? (
           movieCast.map((actor, index) => (
             <li className={css.item} key={actor.id || index}>
               {<CastList info={actor} />}
             </li>
-          ))}
+          ))
+        ) : (
+          <p>Sorry, but we don`t have information about the cast☹️ </p>
+        )}
       </ul>
     </div>
   );
