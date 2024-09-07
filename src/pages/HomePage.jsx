@@ -27,7 +27,7 @@ export default function HomePage() {
   return (
     <div>
       <h2>Trending films</h2>
-      {error && <b>Error!!!</b>}
+      {error && <b>Sorry, something went wrong. Please, try again!</b>}
       {loading && <b>LOADING...</b>}
       {trendingMovies.length > 0 && <MovieList allMovies={trendingMovies} />}
     </div>

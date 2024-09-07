@@ -29,7 +29,7 @@ export default function MovieReviews() {
 
   return (
     <div>
-      {error && <b>Error!!!</b>}
+      {error && <b>Sorry, something went wrong. Please, try again!</b>}
       {loading && <b>LOADING...</b>}
       <ul className={css.list}>
         {movieReviews.length > 0 ? (

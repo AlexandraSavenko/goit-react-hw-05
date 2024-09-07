@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { fetchdata } from "../fetchdata";
 import MovieList from "../components/MovieList/MovieList";
+import css from "../css/MoviePage.module.css";
 
 export default function MoviesPage() {
   // const location = useLocation();
@@ -45,8 +46,8 @@ export default function MoviesPage() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="movieName" />
+      <form className={css.form} onSubmit={handleSubmit}>
+        <input className={css.input} type="text" name="movieName" />
 
         <button type="submit">Search</button>
       </form>

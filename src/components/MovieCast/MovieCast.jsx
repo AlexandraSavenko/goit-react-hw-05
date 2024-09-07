@@ -26,7 +26,7 @@ export default function MovieCast() {
   }, [movieId]);
   return (
     <div>
-      {error && <b>Error!!!</b>}
+      {error && <b>Sorry, something went wrong. Please, try again!</b>}
       {loading && <b>LOADING...</b>}
 
       <ul className={css.list}>
