@@ -7,7 +7,7 @@ import {
   useParams,
 } from "react-router-dom";
 import { getMovie } from "../../fetchdata";
-import css from "../css/MovieDetailsPage.module.css";
+import css from "./MovieDetailsPage.module.css";
 import NotFoundPage from "../NotFoundPage";
 import clsx from "clsx";
 export default function MovieDetailsPage() {
