@@ -50,6 +50,7 @@ export default function MovieDetailsPage() {
   function linksActive(props) {
     return clsx(css.link, props.isActive && css.isActive);
   }
+  console.log(posterPath);
 
   return (
     movieData && (
